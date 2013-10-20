@@ -1,18 +1,18 @@
 //
-//  MainViewController.m
+//  MapViewController.m
 //  HRGeolocating
 //
 //  Created by Hery on 10/14/13.
 //  Copyright (c) 2013 Hery Ratsimihah. All rights reserved.
 //
 
-#import "MainViewController.h"
+#import "MapViewController.h"
 
-@interface MainViewController ()
+@interface MapViewController ()
 
 @end
 
-@implementation MainViewController
+@implementation MapViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,9 +28,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [self startStandardUpdates];
-    UILongPressGestureRecognizer *addAnnotationGestureRecognizer = [[UILongPressGestureRecognizer alloc]
+    addAnnotationGestureRecognizer = [[UILongPressGestureRecognizer alloc]
                                                           initWithTarget:self
-                                                                  action:@selector(addAnnotation:)];
+                                                                  action:@selector(addAnnotationForGestureRecognizer:)];
     [_mainMap addGestureRecognizer:addAnnotationGestureRecognizer];
 }
 
@@ -46,11 +46,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Location Manager
+
 - (void)startStandardUpdates
 {
     if (nil == locationManager)
         locationManager = [[CLLocationManager alloc] init];
-        
+    
     locationManager.delegate = self;
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     locationManager.distanceFilter = 500;
@@ -62,10 +64,16 @@
     currentLocation = [locations lastObject];
 }
 
-- (void)addAnnotation:(id)sender
+#pragma mark - Annotations 
+
+- (void)addAnnotationForGestureRecognizer:(UILongPressGestureRecognizer *)recognizer
 {
+    addAnnotationGestureRecognizer.enabled = NO;
+    [self confirmPin];
     MKPointAnnotation *pointAnnotation = [[MKPointAnnotation alloc] init];
-    pointAnnotation.coordinate = currentLocation.coordinate;
+    CGPoint location = [recognizer locationInView:_mainMap];
+    CLLocationCoordinate2D locationInMap = [_mainMap convertPoint:location toCoordinateFromView:_mainMap];
+    pointAnnotation.coordinate = locationInMap;
     [_mainMap addAnnotation:pointAnnotation];
 }
 
@@ -74,6 +82,19 @@
     MKPinAnnotationView *annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pointAnnotation"];
     return annotationView;
 }
+
+- (void)confirmPin
+{
+    UIAlertView *confirmPinView = [[UIAlertView alloc] initWithTitle:@"Place a pin here?"
+                                                             message:nil
+                                                            delegate:self
+                                                   cancelButtonTitle:@"Yes"
+                                                   otherButtonTitles:@"No", nil];
+    [confirmPinView show];
+    addAnnotationGestureRecognizer.enabled = YES;
+}
+
+#pragma mark - Map Interactions
 
 - (void)centerMapToCurrentUserLocation
 {
@@ -87,4 +108,5 @@
 - (IBAction)centerMap:(id)sender {
     [self centerMapToCurrentUserLocation];
 }
+
 @end

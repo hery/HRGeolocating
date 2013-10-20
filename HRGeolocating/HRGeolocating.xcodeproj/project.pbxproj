@@ -19,9 +19,9 @@
 		9953109B180CF2AD0053632D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99531083180CF2AD0053632D /* UIKit.framework */; };
 		995310A3180CF2AD0053632D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 995310A1180CF2AD0053632D /* InfoPlist.strings */; };
 		995310A5180CF2AD0053632D /* HRGeolocatingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 995310A4180CF2AD0053632D /* HRGeolocatingTests.m */; };
-		995310B0180CF3BD0053632D /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 995310AF180CF3BD0053632D /* MainViewController.m */; };
+		995310B0180CF3BD0053632D /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 995310AF180CF3BD0053632D /* MapViewController.m */; };
 		995310B2180CF4B10053632D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 995310B1180CF4B10053632D /* MapKit.framework */; };
-		995310B4180CF4C80053632D /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 995310B3180CF4C80053632D /* MainViewController.xib */; };
+		995310B4180CF4C80053632D /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 995310B3180CF4C80053632D /* MapViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,10 +51,10 @@
 		995310A0180CF2AD0053632D /* HRGeolocatingTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HRGeolocatingTests-Info.plist"; sourceTree = "<group>"; };
 		995310A2180CF2AD0053632D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		995310A4180CF2AD0053632D /* HRGeolocatingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HRGeolocatingTests.m; sourceTree = "<group>"; };
-		995310AE180CF3BD0053632D /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		995310AF180CF3BD0053632D /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		995310AE180CF3BD0053632D /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		995310AF180CF3BD0053632D /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		995310B1180CF4B10053632D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		995310B3180CF4C80053632D /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		995310B3180CF4C80053632D /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,9 +118,9 @@
 			children = (
 				9953108E180CF2AD0053632D /* AppDelegate.h */,
 				9953108F180CF2AD0053632D /* AppDelegate.m */,
-				995310AE180CF3BD0053632D /* MainViewController.h */,
-				995310AF180CF3BD0053632D /* MainViewController.m */,
-				995310B3180CF4C80053632D /* MainViewController.xib */,
+				995310AE180CF3BD0053632D /* MapViewController.h */,
+				995310AF180CF3BD0053632D /* MapViewController.m */,
+				995310B3180CF4C80053632D /* MapViewController.xib */,
 				99531091180CF2AD0053632D /* Images.xcassets */,
 				99531086180CF2AD0053632D /* Supporting Files */,
 			);
@@ -232,7 +232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9953108A180CF2AD0053632D /* InfoPlist.strings in Resources */,
-				995310B4180CF4C80053632D /* MainViewController.xib in Resources */,
+				995310B4180CF4C80053632D /* MapViewController.xib in Resources */,
 				99531092180CF2AD0053632D /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -253,7 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				99531090180CF2AD0053632D /* AppDelegate.m in Sources */,
-				995310B0180CF3BD0053632D /* MainViewController.m in Sources */,
+				995310B0180CF3BD0053632D /* MapViewController.m in Sources */,
 				9953108C180CF2AD0053632D /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -457,6 +457,7 @@
 				995310AA180CF2AD0053632D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		995310AB180CF2AD0053632D /* Build configuration list for PBXNativeTarget "HRGeolocatingTests" */ = {
 			isa = XCConfigurationList;
@@ -465,6 +466,7 @@
 				995310AD180CF2AD0053632D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

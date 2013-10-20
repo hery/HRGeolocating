@@ -1,5 +1,5 @@
 //
-//  MainViewController.h
+//  MapViewController.h
 //  HRGeolocating
 //
 //  Created by Hery on 10/14/13.
@@ -10,9 +10,10 @@
 #import <MapKit/MapKit.h>
 
 
-@interface MainViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate> {
+@interface MapViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate> {
     CLLocationManager *locationManager;
     CLLocation *currentLocation;
+    UILongPressGestureRecognizer *addAnnotationGestureRecognizer;
 }
 
 @property (weak, nonatomic) IBOutlet MKMapView *mainMap;
