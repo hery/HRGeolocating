@@ -19,6 +19,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        alertViewCount = 0;
     }
     return self;
 }
@@ -69,12 +70,10 @@
 - (void)addAnnotationForGestureRecognizer:(UILongPressGestureRecognizer *)recognizer
 {
     addAnnotationGestureRecognizer.enabled = NO;
-    [self confirmPin];
-    MKPointAnnotation *pointAnnotation = [[MKPointAnnotation alloc] init];
     CGPoint location = [recognizer locationInView:_mainMap];
     CLLocationCoordinate2D locationInMap = [_mainMap convertPoint:location toCoordinateFromView:_mainMap];
-    pointAnnotation.coordinate = locationInMap;
-    [_mainMap addAnnotation:pointAnnotation];
+    pinLocation = locationInMap;
+    [self confirmPin];
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
@@ -83,15 +82,35 @@
     return annotationView;
 }
 
+#pragma mark - Alert Views
+
 - (void)confirmPin
 {
-    UIAlertView *confirmPinView = [[UIAlertView alloc] initWithTitle:@"Place a pin here?"
-                                                             message:nil
-                                                            delegate:self
-                                                   cancelButtonTitle:@"Yes"
-                                                   otherButtonTitles:@"No", nil];
-    [confirmPinView show];
+    if (alertViewCount == 0)
+    {
+        alertViewCount++;
+        UIAlertView *confirmPinView = [[UIAlertView alloc] initWithTitle:@"New Pin"
+                                                                 message:@"Describe how to get there, when it is accessible, etc..."
+                                                                delegate:self
+                                                       cancelButtonTitle:@"Pin!"
+                                                       otherButtonTitles:@"Back", nil];
+        confirmPinView.alertViewStyle = UIAlertViewStylePlainTextInput;
+        [confirmPinView show];
+    } else {
+        alertViewCount = 0;
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
     addAnnotationGestureRecognizer.enabled = YES;
+    if (buttonIndex == 0)
+    {
+        MKPointAnnotation *pointAnnotation = [[MKPointAnnotation alloc] init];
+        pointAnnotation.coordinate = pinLocation;
+        pointAnnotation.title = [[alertView textFieldAtIndex:0] text];;
+        [_mainMap addAnnotation:pointAnnotation];
+    }
 }
 
 #pragma mark - Map Interactions

@@ -10,10 +10,12 @@
 #import <MapKit/MapKit.h>
 
 
-@interface MapViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate> {
+@interface MapViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate, UIAlertViewDelegate> {
     CLLocationManager *locationManager;
     CLLocation *currentLocation;
+    CLLocationCoordinate2D pinLocation;
     UILongPressGestureRecognizer *addAnnotationGestureRecognizer;
+    int alertViewCount;
 }
 
 @property (weak, nonatomic) IBOutlet MKMapView *mainMap;

@@ -19,7 +19,6 @@ Timeline
 * Map system [Complete]
 * Pin tagging [Complete]
 * Pin metadata [Ongoing]
-* Custom UI elements [Planned]
 * Pin location cross-referencing system [Planned]
 * API and database [Planned]
 * Demo app [Ongoing]
