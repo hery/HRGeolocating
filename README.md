@@ -1,4 +1,4 @@
 HRGeolocating
 =============
 
-A crowd-based geolocating framework
+A crowd-based geolocating iOS framework
