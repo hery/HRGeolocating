@@ -6,7 +6,7 @@ A crowd-based geolocating iOS framework
 
 HRGeolocating lets you create your own crowd-based geolocating app. It ensures the accurateness of tagged pins by requiring a developer-specified minimum of tags before publishing a pin.  
 
-Building such an app requires a database and an API to store pin locations, so I will open source a PostgreSQL-backed Django API on Heroku shortly.
+Building such an app requires a database and an API to store pin locations, so I will open source a [PostgreSQL-backed Django API][1] shortly.
 
 Architecture
 ============
@@ -30,5 +30,4 @@ Contact
 
 hery at ratsimihah dot com
 
-
-
+[1]: https://github.com/hery/NSBathroom
