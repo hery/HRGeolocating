@@ -7,6 +7,7 @@
 //
 
 #import "MapViewController.h"
+#import <AFHTTPRequestOperationManager.h>
 
 @interface MapViewController ()
 
@@ -73,7 +74,7 @@
     CGPoint location = [recognizer locationInView:_mainMap];
     CLLocationCoordinate2D locationInMap = [_mainMap convertPoint:location toCoordinateFromView:_mainMap];
     pinLocation = locationInMap;
-    [self confirmPin];
+    [self addPin];
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
@@ -84,7 +85,7 @@
 
 #pragma mark - Alert Views
 
-- (void)confirmPin
+- (void)addPin
 {
     if (alertViewCount == 0)
     {
@@ -109,7 +110,11 @@
         MKPointAnnotation *pointAnnotation = [[MKPointAnnotation alloc] init];
         pointAnnotation.coordinate = pinLocation;
         pointAnnotation.title = [[alertView textFieldAtIndex:0] text];;
-        [_mainMap addAnnotation:pointAnnotation];
+        // Call POST /api/annotation here.
+        [self postAnnotationWithTitle:pointAnnotation.title latitude:pointAnnotation.coordinate.latitude longitude:pointAnnotation.coordinate.longitude];
+        // XReference location here.
+        // Add pin as below if XReference passes.
+        // [_mainMap addAnnotation:pointAnnotation];
     }
 }
 
@@ -126,6 +131,21 @@
 
 - (IBAction)centerMap:(id)sender {
     [self centerMapToCurrentUserLocation];
+}
+
+#pragma mark - Networking
+
+- (void)postAnnotationWithTitle:(NSString *)title latitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSString *coordinateString = [NSString stringWithFormat:@"%f,%f", latitude, longitude];
+    // NSDictionary *parameters = @{@"title": title, @"coordinates":coordinateString};
+    [manager GET:[NSString stringWithFormat:@"http://localhost:5000/api/annotation?title=%@&coordinates=%@", title, coordinateString] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *response = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSLog(@"Response: %@", response);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",[error localizedDescription]);
+    }];
 }
 
 @end
